@@ -47,3 +47,10 @@ class Arrow(BaseModel):
 async def arrow(input: Arrow):
     return f"The arrow's range is {input.range1} or {input.range2} meters."
 
+class Choice(BaseModel):
+    c1: str
+    c2: str
+@app.post("/choice")
+async def choice(input: Choice):
+    return f"It is either {input.c1} or {input.c2}."
+
