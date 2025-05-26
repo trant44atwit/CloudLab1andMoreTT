@@ -50,7 +50,7 @@ async def arrow(input: Arrow):
 class Choice(BaseModel):
     c1: str
     c2: str
-@app.post("/choice")
+@app.post("/Choice")
 async def choice(input: Choice):
     return f"It is either {input.c1} or {input.c2}."
 
