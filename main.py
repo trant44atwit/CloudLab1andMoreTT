@@ -32,3 +32,6 @@ async def time():
 async def date():
     return {"date": datetime.now().strftime("%m/%d/%Y")}
 
+@app.get("/addition")
+async def addition(int1: int, int2: int):
+    return {"total": int1 + int2}
