@@ -28,3 +28,7 @@ async def Yoda_personclass(input: PersonInput):
 async def time():
     return {"time": datetime.now().strftime("%I:%M:%S")}
 
+@app.get("/date")
+async def date():
+    return {"date": datetime.now().strftime("%m/%d/%Y")}
+
