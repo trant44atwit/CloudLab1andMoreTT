@@ -35,3 +35,15 @@ async def date():
 @app.get("/addition")
 async def addition(int1: int, int2: int):
     return {"total": int1 + int2}
+
+@app.get("/subtraction")
+async def subtraction(int1: int, int2: int):
+    return {"total": int1 - int2}
+
+class Arrow(BaseModel):
+    range1: int
+    range2: int
+@app.post("/Arrow")
+async def arrow(input: Arrow):
+    return f"The arrow's range is {input.range1} or {input.range2} meters."
+
