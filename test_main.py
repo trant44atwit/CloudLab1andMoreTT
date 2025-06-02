@@ -78,3 +78,18 @@ class L1Testing(unittest.TestCase):
         print(f"[CHOICE] Expected: '{expected}', Actual: '{response.text}'")
         self.assertEqual(response.status_code, 200)
         self.assertIn("It is either cats or dogs", response.text)
+
+    """def test_getHeaders(self):
+        url = "http://localhost:8080"
+        headers = {
+            "Content-Type": "application/json",
+            "Y-Custom": "CustomValue",
+            "user-email": "TTran",
+            "my-val": "my_value"
+        }
+
+        response = requests.get(f"{PORT}/getHeaders", headers=headers)
+
+        print("Status code: ", response.status_code)
+        print("Response body: ", response.json())
+        self.assertEqual(response.status_code, 200)"""
