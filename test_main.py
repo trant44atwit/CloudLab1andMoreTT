@@ -28,7 +28,8 @@ class L1Testing(unittest.TestCase):
         self.assertIn("Salutations Bob", response.text)
 
     def test_yoda_personclass(self):
-        response = requests.post(f"{PORT}/Yoda_personclass", json={"name": "Luke", "age": 21})
+        info1 = {"name": "Luke", "age": 21}
+        response = requests.post(f"{PORT}/Yoda_personclass", json=info1)
         expected = "21 years you are, young Luke"
         print(f"[YODA] Expected: '{expected}', Actual: '{response.text}'")
         self.assertEqual(response.status_code, 200)
@@ -71,7 +72,8 @@ class L1Testing(unittest.TestCase):
         self.assertIn("range is 100 or 200 meters", response.text)
 
     def test_choice(self):
-        response = requests.post(f"{PORT}/Choice", json={"c1": "cats", "c2": "dogs"})
+        info2 = {"c1": "cats", "c2": "dogs"}
+        response = requests.post(f"{PORT}/Choice", json=info2)
         expected = "It is either cats or dogs."
         print(f"[CHOICE] Expected: '{expected}', Actual: '{response.text}'")
         self.assertEqual(response.status_code, 200)
