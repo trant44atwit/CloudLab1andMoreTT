@@ -4,6 +4,10 @@
 
 This is a simple FastAPI service that displays the usage of different types of routes(simple route, query string route, and path route).
 
+FastAPI: FastAPI is a modern web framework for building HTTP-based service APIs using Python.
+
+Uvicorn: Uvicorn is a fast ASGI web server designed for running Python web applications. It works well and is compatible with FastAPI.
+
 ---
 
 ## Project Description
