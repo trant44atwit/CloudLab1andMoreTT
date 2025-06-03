@@ -3,7 +3,7 @@ import requests
 
 PORT = "http://localhost:8080"
 
-class L1Testing(unittest.TestCase):
+class TestL2(unittest.TestCase):
 
     def test_root_route(self):
         response = requests.get(f"{PORT}/")
@@ -78,3 +78,28 @@ class L1Testing(unittest.TestCase):
         print(f"[CHOICE] Expected: '{expected}', Actual: '{response.text}'")
         self.assertEqual(response.status_code, 200)
         self.assertIn("It is either cats or dogs", response.text)
+
+    def test_getHeaders(self):
+        url = "http://localhost:8080/headers/"
+        headers = {
+            "Content-Type": "application/json",
+            "Y-Custom-Header": "CustomValue",
+            "user-email": "TTran",
+            "my-val": "my-value"
+        }
+
+        response = requests.get(url=url, headers=headers)
+
+        print("Status code: ", response.status_code)
+        print("Response body: ", response.json())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["user_email"], "TTran")
+        self.assertEqual(response.json()["my_val"], "my-value")
+
+    def test_read_cookie(self):
+        cookies = {"username": "Anakin"}
+        response = requests.get(f"{PORT}/readCookie", cookies=cookies)
+        expected = {"username": "Anakin"}
+        print(f"[COOKIE] Sent: {cookies}, Received: {response.json()}")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), expected)
