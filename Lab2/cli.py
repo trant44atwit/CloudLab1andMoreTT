@@ -39,7 +39,36 @@ def call_greetings():
 
 def call_salutations():
     name = input("Enter name: ")
+    age = input("Enter age: ")
+    response = requests.get(f"{PORT}/salutations/{name}/{age}")
+    print(response.json())
+    choice = input("Enter anything to return to menu or 0 to exit: ")
+    if choice == "0":
+        exit()
 
+def call_Yoda():
+    name = input("Enter name: ")
+    age = input("Enter age: ")
+    info1 = {"name": name, "age": age}
+    response = requests.post(f"{PORT}/Yoda_personclass", json=info1)
+    print(response.json())
+    choice = input("Enter anything to return to menu or 0 to exit: ")
+    if choice == "0":
+        exit()
+
+def call_time():
+    response = requests.get(f"{PORT}/time")
+    print(response.json())
+    choice = input("Enter anything to return to menu or 0 to exit: ")
+    if choice == "0":
+        exit()
+
+def call_date():
+    response = requests.get(f"{PORT}/date")
+    print(response.json())
+    choice = input("Enter anything to return to menu or 0 to exit: ")
+    if choice == "0":
+        exit()
 
 def call_addition():
     int1 = input("Enter first integer: ")
@@ -59,20 +88,51 @@ def call_subtraction():
     if choice == "0":
         exit()
 
+def call_arrow():
+    int1 = input("Enter first integer: ")
+    int2 = input("Enter second integer (preferably larger than first integer): ")
+    info = {"range1": int1, "range2": int2}
+    response = requests.post(f"{PORT}/Arrow", json=info)
+    print(response.json())
+    choice = input("Enter anything to return to menu or 0 to exit: ")
+    if choice == "0":
+        exit()
+
+def call_choice():
+    c1 = input("Enter first choice: ")
+    c2 = input("Enter second choice: ")
+    info2 = {"c1": c1, "c2": c2}
+    response = requests.post(f"{PORT}/Choice", json=info2)
+    print(response.json())
+    choice = input("Enter anything to return to menu or 0 to exit: ")
+    if choice == "0":
+        exit()
 
 def main():
     while True:
         menu()
-        choice = input("Enter route number: ")
+        choice = input("Enter route number (1-12): ")
 
         if choice == "1":
             call_root()
         elif choice == "2":
             call_greetings()
+        elif choice == "3":
+            call_salutations()
+        elif choice == "4":
+            call_Yoda()
+        elif choice == "5":
+            call_time()
+        elif choice == "6":
+            call_date()
         elif choice == "7":
             call_addition()
         elif choice == "8":
             call_subtraction()
+        elif choice == "9":
+            call_arrow()
+        elif choice == "10":
+            call_choice()
         elif choice == "13":
             print("Exiting CLI.")
             break
