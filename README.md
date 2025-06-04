@@ -32,6 +32,7 @@ The project consists of the following main components:
   - `/salutations/{name}/{age}` - Accepts `name` and `age` as path parameters.
   - `/time` and `/date` - Returns the current time and date.
   - `/addition` and `/subtraction` - Performs simple arithmetic using query parameters.
+  Lab 2 Additions
   - `/headers` - Reads custom `user-email` and `my_val` headers from the request.
   - `readCookie` - Retrieves a cookie `username` inputted.
 
@@ -67,7 +68,7 @@ Open up the terminal in the directory of main.py (Lab2) and type in: uvicorn mai
 
 Terminal will confirm start-up of the server and provide a url to the page.
 
-##Using the CLI
+##Using the CLI (Lab 2 Addition)
 
 Go to the cli.py file and run the file.
 
