@@ -16,6 +16,10 @@ The application is built using Python and the FastAPI framework. The various rou
 
 The API supports both GET and POST requests and includes use of query parameters, path parameters, and request bodies.
 
+Lab 2 Update:
+
+HTTP headers and cookies have been implemented.
+
 ---
 
 ## Project Design
@@ -28,6 +32,8 @@ The project consists of the following main components:
   - `/salutations/{name}/{age}` - Accepts `name` and `age` as path parameters.
   - `/time` and `/date` - Returns the current time and date.
   - `/addition` and `/subtraction` - Performs simple arithmetic using query parameters.
+  - `/headers` - Reads custom `user-email` and `my_val` headers from the request.
+  - `readCookie` - Retrieves a cookie `username` inputted.
 
 - **POST Endpoints**:
   - `/Yoda_personclass` - Accepts a `name` and `age` to return a Yoda-style sentence.
@@ -54,3 +60,19 @@ The project consists of the following main components:
 You can install the required libraries using:
 
 pip install fastapi uvicorn fastapi pydantic or py -m pip install uvicorn fastapi pydantic
+
+## Running the Server
+
+Open up the terminal in the directory of main.py (Lab2) and type in: uvicorn main:app --port 8080 --reload
+
+Terminal will confirm start-up of the server and provide a url to the page.
+
+##Using the CLI
+
+Go to the cli.py file and run the file.
+
+The terminal will pop up and display a menu of the available routes. 
+
+Choose a desired route and input items as needed.
+
+Rinse and repeat for other routes and exit by stopping the program or enter 0 or 13 depending on if you are at the end of a route or in the menu.
