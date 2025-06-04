@@ -91,7 +91,7 @@ class TestL2(unittest.TestCase):
         response = requests.get(url=url, headers=headers)
 
         print("Status code: ", response.status_code)
-        print("Response body: ", response.json())
+        print("[HEADERS] Response body: ", response.json())
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["user_email"], "TTran")
         self.assertEqual(response.json()["my_val"], "my-value")
