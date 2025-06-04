@@ -108,6 +108,29 @@ def call_choice():
     if choice == "0":
         exit()
 
+def call_headers():
+    url = "http://localhost:8080/headers/"
+    email = input("Enter email: ")
+    val = input("Enter your value: ")
+    headers = {
+        "user-email": email,
+        "my-val": val
+    }
+    response = requests.get(url=url, headers=headers)
+    print(response.json())
+    choice = input("Enter anything to return to menu or 0 to exit: ")
+    if choice == "0":
+        exit()
+
+def call_cookie():
+    username = input("Enter username: ")
+    cookies = {"username": username}
+    response = requests.get(f"{PORT}/readCookie", cookies=cookies)
+    print(response.json())
+    choice = input("Enter anything to return to menu or 0 to exit: ")
+    if choice == "0":
+        exit()
+
 def main():
     while True:
         menu()
@@ -133,6 +156,10 @@ def main():
             call_arrow()
         elif choice == "10":
             call_choice()
+        elif choice == "11":
+            call_headers()
+        elif choice == "12":
+            call_cookie()
         elif choice == "13":
             print("Exiting CLI.")
             break
