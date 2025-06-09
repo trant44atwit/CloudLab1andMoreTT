@@ -1,4 +1,4 @@
-# CloudLab1TT
+# CloudLab1and2TT
 
 ## Introduction
 
