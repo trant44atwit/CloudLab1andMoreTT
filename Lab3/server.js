@@ -27,7 +27,54 @@ app.get('/about', (req, res) => {
     res.send('I do not know about this. Do you?');
 });
 
+//Query 1
+app.get('/search', (req, res) => {
+    const {q} = req.query;
+    if (q) {
+        res.send(`You searched for: ${q}`);
+    } else {
+        res.send('No search query provided.');
+    }
+})
 
+//Query 2
+app.get('/heyo', (req, res) => {
+    const {name} = req.query;
+    if (name) {
+        res.send(`Heyo, ${name}!`);
+    } else {
+        res.send('Heyo, stranger!');
+    }
+});
+
+//Query 3
+app.get('/sum', (req, res) => {
+    const a = parseInt(req.query.a);
+    const b = parseInt(req.query.b);
+    if ( Number.isInteger(a) && Number.isInteger(b)) {
+        const sum = a + b;
+        res.send(`The sum of ${a} and ${b} is ${sum}.`);
+    } else {
+        res.send('Please provide valid integers for a and b.');
+    }
+})
+
+//Header
+app.get('/header', (req, res) => {
+    const token = req.headers['token'];
+    if (token) {
+        res.send(`Token received: ${token}`);
+    }
+    else {
+        res.send('No token provided in the header.');
+    }
+});
+
+//Body Input
+app.post('/submit', (req, res) => {
+    const {name, age} = req.body;
+    res.send(`Name: ${name}, Age: ${age}`);
+});
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
