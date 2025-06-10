@@ -61,6 +61,30 @@ app.get('/sum', (req, res) => {
     }
 })
 
+//Query 4
+app.get('/subtract', (req, res) => {
+    const a = parseInt(req.query.a);
+    const b = parseInt(req.query.b);
+    if ( Number.isInteger(a) && Number.isInteger(b)) {
+        const difference = a - b;
+        res.send(`The difference between ${a} and ${b} is ${difference}.`);
+    } else {
+        res.send('Please provide valid integers for a and b.');
+    }
+})
+
+//Query 5
+app.get('/multiply', (req, res) => {
+    const a = parseInt(req.query.a);
+    const b = parseInt(req.query.b);
+    if ( Number.isInteger(a) && Number.isInteger(b)) {
+        const product = a * b;
+        res.send(`The product of ${a} and ${b} is ${product}.`);
+    } else {
+        res.send('Please provide valid integers for a and b.');
+    }
+});
+
 //Header
 app.get('/header', (req, res) => {
     const token = req.headers['token'];
