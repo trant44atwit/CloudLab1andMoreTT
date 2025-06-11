@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a simple Node.js web service using **Express**. It includes a variety of routes that return HTML Content, have query parameters, header parameteres, and body inputs.
+This project is a simple Node.js web service using **Express**. It includes a variety of routes that return HTML Content, have query parameters, header parameters, and body inputs.
 
 ---
 
@@ -15,13 +15,13 @@ This Express app features:
 - **1 route that uses a custom header**
 - **1 route that accepts JSON body input via POST**
 
-It serves as a lightweight example of handling different types of requests in a backend Node.js service.
+It serves as an example of handling different types of requests in the Node.js service.
 
 ---
 
 ## Design
 
-### Technology Stack
+### Packages
 - Node.js
 - Express.js
 
@@ -53,5 +53,7 @@ Make sure Node.js is installed. Then run:
 "npm init -y"
 
 "npm install express"
+
+### Running the server
 
 After, type in the terminal "node server.js" then click on the provided web link.
