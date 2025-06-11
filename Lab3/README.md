@@ -56,4 +56,6 @@ Make sure Node.js is installed. Then run:
 
 ### Running the server
 
-After, type in the terminal "node server.js" then click on the provided web link.
+After, type in the terminal "node server.js" then click on the provided web link (http://localhost:8080/).
+
+To test routes, type in the routes shown above. Try your own parameters too!
