@@ -20,6 +20,8 @@ Lab 2 Update:
 
 HTTP headers and cookies have been implemented.
 
+A Python Driver Line has also been added for ease of testing for the routes.
+
 ---
 
 ## Project Design
@@ -46,6 +48,9 @@ The project consists of the following main components:
 - `Arrow`: for range options
 - `Choice`: for choice message
 
+**CLI (Command Line Interface)**
+- A Python Driver Line that provides a menu of all implemented routes.
+
 ---
 
 ## How to Run the Project
@@ -71,6 +76,10 @@ Terminal will confirm start-up of the server and provide a url to the page.
 ## Using the CLI (Lab 2 Addition)
 
 Go to the cli.py file and run the file.
+
+If an input is needed, the terminal will ask the user for input.
+
+The CLI will run until told to stop.
 
 The terminal will pop up and display a menu of the available routes. 
 
