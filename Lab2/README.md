@@ -42,14 +42,14 @@ The project consists of the following main components:
   - `/Yoda_personclass` - Accepts a `name` and `age` to return a Yoda-style sentence.
   - `/Arrow` - Accepts `range1` and `range2` to return a formatted arrow range string.
   - `/choice` - Accepts two string choices and returns a sentence offering a choice.
+ 
+  **CLI (Command Line Interface)**
+- A Python Driver Line that provides a menu of all implemented routes.
 
 **Models used:**
 - `PersonInput`: for Yoda-style greeting
 - `Arrow`: for range options
 - `Choice`: for choice message
-
-**CLI (Command Line Interface)**
-- A Python Driver Line that provides a menu of all implemented routes.
 
 ---
 
