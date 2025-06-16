@@ -41,7 +41,7 @@ It serves as an example of handling different types of requests in the Node.js s
 | `/multiply?a=3&b=5`      | GET    | Query             | Returns the product of two integers         |
 | `/header`                | GET    | Header            | Reads a `token` from the request header     |
 | `/submit`                | POST   | JSON Body         | Accepts and returns a name and age JSON     |
-
+Note: For the queries, the string or integer after the "=" can be replaced with your own.
 ---
 
 ## How to Run the Project
