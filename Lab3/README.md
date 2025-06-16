@@ -48,7 +48,7 @@ It serves as an example of handling different types of requests in the Node.js s
 
 ### Install Dependencies
 
-Make sure Node.js is installed. Then run:
+Make sure Node.js is installed. Then run these commands in the terminal of the directory for Lab 3 if package.json and package-lock.json are not present:
 
 "npm init -y"
 
