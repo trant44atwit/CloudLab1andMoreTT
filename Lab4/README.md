@@ -63,4 +63,6 @@ Go to Docker, then go to the "Containers" tab, and click on the "8080:8080" link
 
 This will bring you to the web page.
 
+Test the FastAPI mentioned in the description as needed.
+
 
