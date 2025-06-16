@@ -27,7 +27,7 @@ It serves as an example of handling different types of requests in the Node.js s
 
 ### Route Overview
 
-| Route                    | Method | Type              | Description                                 |
+| Route (Examples)         | Method | Type              | Description                                 |
 |--------------------------|--------|-------------------|---------------------------------------------|
 | `/`                      | GET    | HTML              | Returns "Hello World!"                      |
 | `/hello_there`           | GET    | HTML              | Returns a Star Wars meme reference          |
