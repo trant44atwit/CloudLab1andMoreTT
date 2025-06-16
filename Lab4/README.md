@@ -34,7 +34,8 @@ This lab uses Docker to containerize the already built Python FastAPI web servic
 ---
 
 ## Design
-Project Structure:
+Lab Structure:
+Lab4/
 ├── main.py             # FastAPI application
 ├── cli.py              # Command-line interface 
 ├── requirements.txt    # Package installations for Docker
