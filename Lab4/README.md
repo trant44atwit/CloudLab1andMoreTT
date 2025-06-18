@@ -13,7 +13,7 @@ This lab uses Docker to containerize the already built Python FastAPI web servic
 **Features:**
 
 - Multiple GET and POST routes for greetings, math operations, date/time, and more.
-- CLI with an interactive menu to make HTTP requests to the FastAPI backend.
+- CLI with an interactive menu to make HTTP requests to the FastAPI backend (Won't be used for this lab).
 - Backend runs inside a Docker container with **Uvicorn** as the server.
 
 **FastAPI Routes**
@@ -39,7 +39,7 @@ Lab4/
 
 ├── main.py             # FastAPI application
 
-├── cli.py              # Command-line interface 
+├── cli.py              # Command-line interface (Note: Will not be used)
 
 ├── requirements.txt    # Package installations for Docker
 
