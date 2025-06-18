@@ -50,6 +50,7 @@ Lab4/
 └── README.md           # Project documentation
 
 ## Running the Project
+cd into Lab4 first.
 
 Make sure Docker is open and running.
 
