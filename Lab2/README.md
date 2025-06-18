@@ -10,7 +10,7 @@ Uvicorn: Uvicorn is a fast ASGI web server designed for running Python web appli
 
 ---
 
-## Project Description
+## Lab Description
 
 The application is built using Python and the FastAPI framework. The various routes return greetings, perform simple math operations, return messages based on input, and display the current date/time.
 
@@ -24,9 +24,9 @@ A Python Driver Line has also been added for ease of testing for the routes.
 
 ---
 
-## Project Design
+## Lab Design
 
-The project consists of the following main components:
+The lab consists of the following main components:
 
 - **GET Endpoints**:
   - `/` - Returns a welcome message.
