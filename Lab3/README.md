@@ -64,7 +64,8 @@ To test routes, type in the routes shown above. Try your own parameters too!
 
 On the homepage of Postman, click "New Request".
 
-**Header Testing**
+### Header Testing
+
 Make sure the request is "GET".
 
 Type into the URL section: http://localhost:8080/header
@@ -73,7 +74,8 @@ Navigate to the Headers Tab and under "Key", type in "Token" then a value next t
 
 Hit "Send" and the terminal in Postman will display the Key and Value.
 
-**Submit Testing**
+### Submit Testing
+
 Make sure the request is "POST".
 
 Type into the URL section: http://localhost:8080/submit
