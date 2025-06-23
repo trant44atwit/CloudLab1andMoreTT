@@ -32,7 +32,7 @@ It serves as an example of handling different types of requests in the Node.js s
 | `/`                      | GET    | HTML              | Returns "Hello World!"                      |
 | `/hello_there`           | GET    | HTML              | Returns a Star Wars meme reference          |
 | `/contact`               | GET    | HTML              | Returns email contact info                  |
-| `/crazy`                 | GET    | HTML              | Returns a humorous quote                    |
+| `/crazy`                 | GET    | HTML              | Returns a quote                             |
 | `/about`                 | GET    | HTML              | Returns a vague message                     |
 | `/search?q=word`         | GET    | Query             | Echoes back the search term                 |
 | `/heyo?name=Timmy`       | GET    | Query             | Personalized greeting using name            |
@@ -44,7 +44,7 @@ It serves as an example of handling different types of requests in the Node.js s
 Note: For the queries, the string or integer after the "=" can be replaced with your own.
 ---
 
-## How to Run the Project
+## How to Run the Project (In VS Code)
 
 ### Install Dependencies
 
@@ -60,4 +60,33 @@ After, type in the terminal "node server.js" then click on the provided web link
 
 To test routes, type in the routes shown above. Try your own parameters too!
 
-**Note:** For header and submit, use Postman to test the token for /header and POST for /submit.
+**Note:** For header and submit, use Postman to test the token for /header and POST for /submit. Make sure the service is running!
+
+On the homepage of Postman, click "New Request".
+
+**Header Testing**
+Make sure the request is "GET".
+
+Type into the URL section: http://localhost:8080/header
+
+Navigate to the Headers Tab and under "Key", type in "Token" then a value next to it.
+
+Hit "Send" and the terminal in Postman will display the Key and Value.
+
+**Submit Testing**
+Make sure the request is "POST".
+
+Type into the URL section: http://localhost:8080/submit
+
+Navigate to the Body tab and click on "raw"
+
+Copy and paste this into the body:
+
+{
+  "name": "",
+  "age": 
+}
+
+Fill in your own parameters then click "Send".
+
+The terminal in Postman will display the name and age just inputted.
