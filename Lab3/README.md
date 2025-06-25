@@ -48,7 +48,7 @@ Note: For the queries, the string or integer after the "=" can be replaced with 
 
 ### Install Dependencies
 
-Make sure Node.js is installed. Then run these commands in the terminal of the directory for Lab 3 if package.json and package-lock.json are not present:
+Make sure Node.js is installed. Then run these commands in the terminal of the directory for Lab 3 (cd into it) if package.json and package-lock.json are not present:
 
 "npm init -y"
 
