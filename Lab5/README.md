@@ -76,3 +76,15 @@ The database follows the setup of an e-commerce application:
 - Open `guitar_shop_queries.sql` in a new SQL editor.
 - Execute each of the 15 queries (individually or all at once).
 - Results will display in the query result pane.
+
+### Running Query Script
+
+#### 1. Creating Initial Script
+- Right-click the local host in the connection list on the left.
+- Hover over "SQL Editor" and click "New SQL script".
+- Copy all of the content in the "queries.sql" file and paste it into the new script page.
+- Double-check that the selected database is "my_guitar_shop" next to "localhost" in the hot bar at the top.
+
+#### 2. Running script
+- Click the "Execute SQL script" (or use ALT + X) to run the script.
+Allow some time for the script to run, and then all the queries will appear at the bottom in separate tabs.
