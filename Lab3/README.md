@@ -85,8 +85,11 @@ Navigate to the Body tab and click on "raw"
 Copy and paste this into the body:
 
 {
+
   "name": "",
+  
   "age": 
+  
 }
 
 Fill in your own parameters then click "Send".
