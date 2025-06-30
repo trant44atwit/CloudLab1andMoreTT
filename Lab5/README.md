@@ -15,7 +15,7 @@ The project uses a pre-written SQL script to create and populate a database (`my
 - `orders`, `order_items`
 - `administrators`
 
-After the database is created and populated, a set of **15 SQL queries** is developed to extract data from the database. These queries demonstrate:
+After the database is created and populated, a set of **16 SQL queries** is developed to extract data from the database. These queries demonstrate:
 
 - Simple single-table `SELECT` statements  
 - `INNER JOIN`s across related tables  
