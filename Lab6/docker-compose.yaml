@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: CCLab6
+
+    ports:
+      - "3310:3306"
+    volumes:
+      - lab6:/var/lib/mysql
+
+volumes:
+  lab6:
