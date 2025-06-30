@@ -1,4 +1,5 @@
 import requests
+import mysql.connector
 
 PORT = "http://localhost:8080"
 
