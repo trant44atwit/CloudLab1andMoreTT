@@ -8,6 +8,8 @@ This lab involves containerizing the simulated retail database for an online gui
 
 ## Description
 
+The docker-compose.yaml file defines a single service named mysql that runs a MySQL server using the latest official Docker image. 
+
 The project uses a pre-written SQL script to create and populate a database (`my_guitar_shop`) with several interrelated tables:
 
 - `products`, `categories`
@@ -62,10 +64,10 @@ The database follows the setup of an e-commerce application:
 ### Container Setup
 
 - cd into the Lab6 directory and have Docker running.
-- Open the terminal and run "docker-compose up -d" ("docker compose up -d" for Windows).
+- Open the terminal and run "docker-compose up -d" (or "docker compose up -d").
 - Navigate to Dbeaver and create a new connection with the port being 3310.
 - Enter the password as "CCLab6".
-- Test the connection. Note: If you recieve an error of "Public Key Retrieval is not allowed", click on the "Driver properties" tab, look for "allowPublicKeyRetrieval" and change the value from "false" to "true".
+- Test the connection. Note: If you receive an error of "Public Key Retrieval is not allowed", click on the "Driver properties" tab, look for "allowPublicKeyRetrieval" and change the value from "false" to "true".
 - Click "OK" and connect to it.
 
 
