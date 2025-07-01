@@ -1,4 +1,4 @@
-# Lab 7 – Cloud API + Database Integration
+# Lab 7 – Containerization of Python FastAPI and MySQL Database with CLI
 
 ## Introduction
 
