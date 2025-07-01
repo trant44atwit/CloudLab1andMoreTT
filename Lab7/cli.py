@@ -1,7 +1,24 @@
 import requests
 import mysql.connector
+import os
 
 PORT = "http://localhost:8080"
+
+db = mysql.connector.connect(
+    host="localhost",
+    port=3307,
+    user="root",
+    password="CCLab7",
+    database="my_guitar_shop"
+)
+cursor = db.cursor()
+
+def run_sql_query(query):
+    cursor.execute(query)
+    results = cursor.fetchall()
+    for row in results:
+        print(row)
+    input("Press Enter to return to the DB query menu")
 
 
 def menu():
@@ -18,7 +35,8 @@ def menu():
     print("10. Choice")
     print("11. Headers")
     print("12. readCookie")
-    print("13. Exit")
+    print("13. Terminate CLI")
+    print("14. Main Menu")
 
 
 def call_root():
@@ -134,8 +152,25 @@ def call_cookie():
 
 def main():
     while True:
+        print("\nFast = FastAPI routes (like before)")
+        print("Options = Run SQL database queries")
+        print("Exit = Exit the CLI")
+        initialchoice = input("\nChoose initial path:")
+        if initialchoice.lower() == "fast":
+            fast_menu()
+        elif initialchoice.lower() == "options":
+            db_query_menu()
+        elif initialchoice.lower() == "exit":
+            exit()
+        else:
+            print("Invalid choice. Please try again.")
+
+
+
+def fast_menu():
+    while True:
         menu()
-        choice = input("Enter route number (1-13): ")
+        choice = input("Enter route number (1-14): ")
 
         if choice == "1":
             call_root()
@@ -162,11 +197,81 @@ def main():
         elif choice == "12":
             call_cookie()
         elif choice == "13":
-            print("Exiting CLI.")
-            break
+            exit()
+        elif choice == "14":
+            main()
         else:
             print("Invalid choice, please try again.")
 
+def db_query_menu():
+    while True:
+        print("\nDatabase Query Menu")
+        print("1. Show all products")
+        print("2. Show all categories")
+        print("3. Show all addresses in CA")
+        print("4. Show products > $700")
+        print("5. Show admin email addresses")
+        print("6. Product names with category names")
+        print("7. Orders with customer names")
+        print("8. Order items with product names")
+        print("9. Orders with shipping address details")
+        print("10. Customer orders and total quantity")
+        print("11. Count of addresses per state")
+        print("12. Average product price per category")
+        print("13. Total number of orders per customer")
+        print("14. Total revenue (price - discount)")
+        print("15. Orders with full name + shipping cost")
+        print("16. Count of addresses per city")
+        print("17. Return to Main Menu")
+
+        qchoice = input("Enter your query number (1-17): ")
+
+        if qchoice in queries:
+            run_sql_query(queries[qchoice])
+        elif qchoice == "17":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+queries = {
+            "1": "SELECT * FROM products;",
+            "2": "SELECT * FROM categories;",
+            "3": "SELECT * FROM addresses WHERE state = 'CA';",
+            "4": "SELECT product_name, list_price FROM products WHERE list_price > 700;",
+            "5": "SELECT email_address FROM administrators;",
+            "6": """SELECT products.product_name, categories.category_name
+                    FROM products
+                    INNER JOIN categories ON products.category_id = categories.category_id;""",
+            "7": """SELECT orders.order_id, orders.order_date, customers.first_name, customers.last_name
+                    FROM orders
+                    INNER JOIN customers ON orders.customer_id = customers.customer_id;""",
+            "8": """SELECT order_items.order_id, products.product_name, order_items.quantity
+                    FROM order_items
+                    INNER JOIN products ON order_items.product_id = products.product_id;""",
+            "9": """SELECT orders.order_id, addresses.line1, addresses.city, addresses.state
+                    FROM orders
+                    INNER JOIN addresses ON orders.ship_address_id = addresses.address_id;""",
+            "10": """SELECT customers.first_name, customers.last_name, orders.order_id,
+                            SUM(order_items.quantity) AS total_items
+                     FROM customers
+                     INNER JOIN orders ON customers.customer_id = orders.customer_id
+                     INNER JOIN order_items ON orders.order_id = order_items.order_id
+                     GROUP BY orders.order_id, customers.first_name, customers.last_name;""",
+            "11": "SELECT state, COUNT(*) AS num_addresses FROM addresses GROUP BY state;",
+            "12": """SELECT categories.category_name, AVG(products.list_price) AS avg_price
+                     FROM products
+                     INNER JOIN categories ON products.category_id = categories.category_id
+                     GROUP BY categories.category_name;""",
+            "13": """SELECT customers.first_name, customers.last_name, COUNT(orders.order_id) AS num_orders
+                     FROM customers
+                     INNER JOIN orders ON customers.customer_id = orders.customer_id
+                     GROUP BY customers.customer_id;""",
+            "14": "SELECT SUM(item_price - discount_amount) AS total_revenue FROM order_items;",
+            "15": """SELECT orders.order_id, customers.first_name, customers.last_name, orders.ship_amount
+                     FROM orders
+                     INNER JOIN customers ON orders.customer_id = customers.customer_id;""",
+            "16": "SELECT city, COUNT(*) AS num_addresses FROM addresses GROUP BY city;"
+        }
 
 if __name__ == "__main__":
     main()
