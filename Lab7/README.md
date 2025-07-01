@@ -119,9 +119,47 @@ These are tested through both the CLI and `unittest`.
 
 #### 2. Running script
 - Click the "Execute SQL script" (or use ALT + X) to run the script.
-Allow some time for the script to run, and then all the queries will appear at the bottom in separate tabs.
+- Allow some time for the script to run, and then all the queries will appear at the bottom in separate tabs.
 
+## FastAPI
 
+Go to Docker, then go to the "Containers" tab, expand the menu under Lab7, and click on the "8080:8080" link under the ports section (will be highlighted in blue).
+
+This will bring you to the web page.
+
+Test the FastAPI mentioned in the description as needed.
+
+### Header Testing
+
+Make sure the request is "GET".
+
+Type into the URL section: http://localhost:8080/header
+
+Navigate to the Headers Tab and under "Key", type in "Token" then a value next to it.
+
+Hit "Send" and the terminal in Postman will display the Key and Value.
+
+### Submit Testing
+
+Make sure the request is "POST".
+
+Type into the URL section: http://localhost:8080/submit
+
+Navigate to the Body tab and click on "raw"
+
+Copy and paste this into the body:
+
+{
+
+  "name": "",
+  
+  "age": 
+  
+}
+
+Fill in your own parameters then click "Send".
+
+The terminal in Postman will display the name and age just inputted.
 
 
 
