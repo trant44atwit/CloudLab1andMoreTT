@@ -11,9 +11,9 @@ This project demonstrates the integration of a **FastAPI web service** with a **
 The project includes:
 
 - A **FastAPI server** with multiple routes that demonstrate working with query strings, path parameters, headers, cookies, and JSON bodies.
-- A **MySQL database** (`my_guitar_shop`) containing realistic e-commerce data across tables such as `products`, `orders`, `customers`, and more.
+- A **MySQL database** (`my_guitar_shop`) containing realistic shop data across tables such as `products`, `orders`, `customers`, and more.
 - A **Python command-line interface (CLI)** that allows the user to interact with either API routes or database queries through a menu-driven terminal interface.
-- A **unit testing suite** built with `unittest` to validate both the FastAPI routes and MySQL queries, ensuring correctness and coverage.
+- A **unit testing suite** built with `unittest` to validate both the FastAPI routes and MySQL queries, ensuring outputs are as expected.
 
 ---
 
@@ -70,6 +70,28 @@ The DB includes:
 - `GROUP BY` on state, city, category, customer
 
 These are tested through both the CLI and `unittest`.
+
+### Containers
+
+This lab uses **Docker Compose** to define and run two fully containerized services:
+
+### FastAPI Service
+
+- **Built from a local `Dockerfile`**
+- Based on a minimal `python:3.9-alpine` image
+- Installs dependencies from `requirements.txt`
+- Runs the `main.py` FastAPI app using **Uvicorn** on port `8080`
+- Exposed on the host machine at: [http://localhost:8080](http://localhost:8080)
+
+---
+
+### MySQL Service 
+
+- Uses the official `mysql:latest` image
+- Configured with root password: `CCLab7`
+- Exposes MySQL on port `3307` (mapped from internal `3306`)
+- Persists all database data in a Docker volume named `lab7database`
+- Automatically initializes with the `my_guitar_shop` schema using `createguitar.sql`
 
 
 ## How to Run the Project
