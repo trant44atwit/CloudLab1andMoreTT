@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project demonstrates the integration of a RESTful **FastAPI web service** with a **MySQL relational database**, alongside a custom-built **Python CLI** and comprehensive **unit testing suite**. It showcases how web APIs can interact with both dynamic HTTP routes and static SQL queries to power full-stack applications.
+This project demonstrates the integration of a **FastAPI web service** with a **MySQL relational database**, alongside a custom-built **Python CLI** and comprehensive **unit testing suite**. It showcases how web APIs can interact with both dynamic HTTP routes and static SQL queries.
 
 ---
 
