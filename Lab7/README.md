@@ -21,12 +21,19 @@ The project includes:
 
 Lab7/
 ├── cli.py # Command-line interface (API and SQL options)
+
 ├── main.py # FastAPI app with 13 routes
+
 ├── test_L2.py # Unit tests for API endpoints and SQL queries
+
 ├── Dockerfile # FastAPI container build file
+
 ├── docker-compose.yml # Docker Compose config for FastAPI + MySQL
+
 ├── requirements.txt # Python dependencies for FastAPI container
+
 ├── createguitar.sql # SQL script to initialize the database
+
 └── README.md 
 
 ### FastAPI Route Summary (`main.py`)
