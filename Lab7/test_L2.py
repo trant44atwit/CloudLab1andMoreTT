@@ -1,9 +1,21 @@
 import unittest
 import requests
+import mysql.connector
 
 PORT = "http://localhost:8080"
 
+db = mysql.connector.connect(
+    host="localhost",
+    port=3307,
+    user="root",
+    password="CCLab7",
+    database="my_guitar_shop"
+)
+cursor = db.cursor()
+
 class TestL2(unittest.TestCase):
+    cursor = db.cursor()
+
 
     def test_root_route(self):
         response = requests.get(f"{PORT}/")
@@ -103,3 +115,189 @@ class TestL2(unittest.TestCase):
         print(f"[COOKIE] Sent: {cookies}, Received: {response.json()}")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), expected)
+
+
+    def test_products(self):
+        cursor.execute("SELECT * FROM products;")
+        rows = cursor.fetchall()
+        expected = 10
+        actual = len(rows)
+        print(f"[PRODUCTS] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_categories(self):
+        cursor.execute("SELECT * FROM categories;")
+        rows = cursor.fetchall()
+        expected = 4
+        actual = len(rows)
+        print(f"[CATEGORIES] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_addresses_ca(self):
+        cursor.execute("SELECT * FROM addresses WHERE state = 'CA';")
+        rows = cursor.fetchall()
+        expected = 5
+        actual = len(rows)
+        print(f"[ADDRESSES CA] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_products_over_700(self):
+        cursor.execute("SELECT product_name, list_price FROM products WHERE list_price > 700;")
+        rows = cursor.fetchall()
+        expected = 4
+        actual = len(rows)
+        print(f"[PRODUCTS > $700] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_admin_emails(self):
+        self.cursor.execute("SELECT email_address FROM administrators;")
+        rows = self.cursor.fetchall()
+        expected = 3
+        actual = len(rows)
+        print(f"[ADMIN EMAILS] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_products_with_category(self):
+        cursor.execute("""
+                            SELECT products.product_name, categories.category_name
+                            FROM products
+                                     INNER JOIN categories ON products.category_id = categories.category_id;
+                            """)
+        rows = cursor.fetchall()
+        expected = 10
+        actual = len(rows)
+        print(f"[PRODUCTS + CATEGORIES] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_orders_with_customer_names(self):
+        cursor.execute("""
+                            SELECT orders.order_id, orders.order_date, customers.first_name, customers.last_name
+                            FROM orders
+                                     INNER JOIN customers ON orders.customer_id = customers.customer_id;
+                            """)
+        rows = cursor.fetchall()
+        expected = 9
+        actual = len(rows)
+        print(f"[ORDERS + CUSTOMERS] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_order_items_with_products(self):
+        cursor.execute("""
+                            SELECT order_items.order_id, products.product_name, order_items.quantity
+                            FROM order_items
+                                     INNER JOIN products ON order_items.product_id = products.product_id;
+                            """)
+        rows = cursor.fetchall()
+        expected = 12
+        actual = len(rows)
+        print(f"[ORDER ITEMS + PRODUCTS] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_orders_with_shipping_addresses(self):
+        cursor.execute("""
+                            SELECT orders.order_id, addresses.line1, addresses.city, addresses.state
+                            FROM orders
+                                     INNER JOIN addresses ON orders.ship_address_id = addresses.address_id;
+                            """)
+        rows = cursor.fetchall()
+        expected = 9
+        actual = len(rows)
+        print(f"[ORDERS + ADDRESSES] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_customer_order_totals(self):
+        cursor.execute("""
+                            SELECT customers.first_name,
+                                   customers.last_name,
+                                   orders.order_id,
+                                   SUM(order_items.quantity) AS total_items
+                            FROM customers
+                                     INNER JOIN orders ON customers.customer_id = orders.customer_id
+                                     INNER JOIN order_items ON orders.order_id = order_items.order_id
+                            GROUP BY orders.order_id, customers.first_name, customers.last_name;
+                            """)
+        rows = cursor.fetchall()
+        expected = 9
+        actual = len(rows)
+        print(f"[ORDER TOTALS] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_address_count_by_state(self):
+        cursor.execute("""
+                            SELECT state, COUNT(*) AS num_addresses
+                            FROM addresses
+                            GROUP BY state;
+                            """)
+        rows = cursor.fetchall()
+        expected = 6
+        actual = len(rows)
+        print(f"[ADDRESS COUNT BY STATE] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_avg_price_per_category(self):
+        cursor.execute("""
+                            SELECT categories.category_name, AVG(products.list_price) AS avg_price
+                            FROM products
+                                     INNER JOIN categories ON products.category_id = categories.category_id
+                            GROUP BY categories.category_name;
+                            """)
+        rows = cursor.fetchall()
+        expected = 3
+        actual = len(rows)
+        print(f"[AVG PRICE PER CATEGORY] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_order_count_by_customer(self):
+        self.cursor.execute("""
+                            SELECT customers.first_name, customers.last_name, COUNT(orders.order_id) AS num_orders
+                            FROM customers
+                                     INNER JOIN orders ON customers.customer_id = orders.customer_id
+                            GROUP BY customers.customer_id;
+                            """)
+        rows = self.cursor.fetchall()
+        expected = 7
+        actual = len(rows)
+        print(f"[ORDER COUNT BY CUSTOMER] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_total_revenue_value(self):
+        cursor.execute("""
+                            SELECT SUM(item_price - discount_amount) AS total_revenue
+                            FROM order_items;
+                            """)
+        row = cursor.fetchone()
+        expected_row_count = 1
+        expected_total_revenue = 6750.27
+
+        actual_row_count = 1
+        actual_total_revenue = float(row[0])
+
+        print(f"[TOTAL REVENUE] Expected rows: {expected_row_count}, got: {actual_row_count}")
+        print(f"[TOTAL REVENUE] Expected value: {expected_total_revenue}, got: {actual_total_revenue}")
+
+        self.assertEqual(actual_row_count, expected_row_count)
+        self.assertAlmostEqual(actual_total_revenue, expected_total_revenue, places=2)
+
+    def test_orders_with_shipping_costs(self):
+        cursor.execute("""
+                            SELECT orders.order_id, customers.first_name, customers.last_name, orders.ship_amount
+                            FROM orders
+                                     INNER JOIN customers ON orders.customer_id = customers.customer_id;
+                            """)
+        rows = cursor.fetchall()
+        expected = 9
+        actual = len(rows)
+        print(f"[ORDERS + SHIP AMOUNTS] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
+
+    def test_address_count_by_city(self):
+        cursor.execute("""
+                            SELECT city, COUNT(*) AS num_addresses
+                            FROM addresses
+                            GROUP BY city;
+                            """)
+        rows = cursor.fetchall()
+        expected = 9
+        actual = len(rows)
+        print(f"[ADDRESS COUNT BY CITY] Expected {expected}, got {actual}")
+        self.assertEqual(actual, expected)
