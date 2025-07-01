@@ -20,6 +20,7 @@ The project includes:
 ## Design
 
 Lab7/
+
 ├── cli.py # Command-line interface (API and SQL options)
 
 ├── main.py # FastAPI app with 13 routes
