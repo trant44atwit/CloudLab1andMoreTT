@@ -63,7 +63,7 @@ The DB includes:
 - `orders`, `order_items`
 - `administrators`
 
-### 🧠 Query Capabilities
+### Query Capabilities
 
 - Single-table queries
 - `INNER JOIN` with multiple relations
@@ -78,10 +78,50 @@ These are tested through both the CLI and `unittest`.
 
 - Docker & Docker Compose installed
 - Python 3.9+ (for CLI and unit tests)
-- MySQL client (optional for direct DB access)
+- Dbeaver
+- MySQL client 
+
+### Container Setup
+
+- cd into the Lab7 directory and have Docker running.
+- Open the terminal and run "docker-compose up -d" (or "docker compose up -d"). Note: This should start up both the FastAPI and MySQL services.
+- Navigate to Dbeaver and create a new connection with the port being 3307.
+- Enter the password as "CCLab7".
+- Test the connection. Note: If you receive an error of "Public Key Retrieval is not allowed", click on the "Driver properties" tab, look for "allowPublicKeyRetrieval" and change the value from "false" to "true".
+- Click "OK" and connect to it.
 
 
-### 🐳 Step 1: Start Docker Containers
+#### 1. Create and Populate the Database
+
+- Open `createguitar.sql` in DBeaver.
+- Run the entire script to:
+- Create the `my_guitar_shop` database
+- Create tables and insert sample data
+
+#### 2. Verify Database Setup
+
+- Refresh the table list in your SQL tool.
+- Ensure `my_guitar_shop` appears with all tables.
+
+#### 3. Run the Queries
+
+- Open `guitar_shop_queries.sql` in a new SQL editor.
+- Execute each of the 15 queries (individually or all at once).
+- Results will display in the query result pane.
+
+### Running Query Script
+
+#### 1. Creating Initial Script
+- Right-click the local host in the connection list on the left.
+- Hover over "SQL Editor" and click "New SQL script".
+- Copy all of the content in the "queries.sql" file and paste it into the new script page.
+- Double-check that the selected database is "my_guitar_shop" next to "localhost" in the hot bar at the top.
+
+#### 2. Running script
+- Click the "Execute SQL script" (or use ALT + X) to run the script.
+Allow some time for the script to run, and then all the queries will appear at the bottom in separate tabs.
+
+
 
 
 
