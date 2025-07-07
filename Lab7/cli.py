@@ -222,13 +222,16 @@ def db_query_menu():
         print("14. Total revenue (price - discount)")
         print("15. Orders with full name + shipping cost")
         print("16. Count of addresses per city")
-        print("17. Return to Main Menu")
+        print("17. Terminate CLI")
+        print("18. Return to Main Menu")
 
         qchoice = input("Enter your query number (1-17): ")
 
         if qchoice in queries:
             run_sql_query(queries[qchoice])
         elif qchoice == "17":
+            exit()
+        elif qchoice == "18":
             break
         else:
             print("Invalid choice. Please try again.")
