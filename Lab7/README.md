@@ -183,5 +183,19 @@ Fill in your own parameters then click "Send".
 
 The terminal in Postman will display the name and age just inputted.
 
+## CLI (Uses containerized MySQL and FastAPI)
+
+Running the CLI is simple. Navigate to the CLI file and run it. You will be prompted to choose a menu or exit.
+
+### FAST Menu
+- Uses the FastAPI service and allows testing of every route from the terminal
+- Prompts user for input if needed
+- Allows for termination of the program or return to the main menu
+
+### Option Menu
+- Uses MySQL container queries
+- Retrieves data from the database within the containerized MySQL
+- Allows for easy testing of grabbing specific queries from the guitar shop database within the terminal
+
 
 
