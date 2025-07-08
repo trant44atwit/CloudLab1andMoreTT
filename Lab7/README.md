@@ -106,6 +106,7 @@ This lab uses **Docker Compose** to define and run two fully containerized servi
 ### Container Setup
 
 - cd into the Lab7 directory and have Docker running.
+- In the terminal of the directory of Lab 7, type: "docker build -t lab7 ."
 - Open the terminal and run "docker-compose up -d" (or "docker compose up -d"). Note: This should start up both the FastAPI and MySQL services.
 - Navigate to Dbeaver and create a new connection with the port being 3307.
 - Enter the password as "CCLab7".
