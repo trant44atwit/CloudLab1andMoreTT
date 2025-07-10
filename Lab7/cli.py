@@ -225,7 +225,7 @@ def db_query_menu():
         print("17. Terminate CLI")
         print("18. Return to Main Menu")
 
-        qchoice = input("Enter your query number (1-17): ")
+        qchoice = input("Enter your query number (1-18): ")
 
         if qchoice in queries:
             run_sql_query(queries[qchoice])
