@@ -6,9 +6,9 @@ PORT = "http://localhost:8080"
 
 db = mysql.connector.connect(
     host="localhost",
-    port=3307,
+    port=3311,
     user="root",
-    password="CCLab7",
+    password="CCLab8",
     database="my_guitar_shop"
 )
 cursor = db.cursor()

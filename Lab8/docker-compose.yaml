@@ -3,12 +3,12 @@ version: "3.8"
 services:
   mysql:
     image: mysql:latest
-    container_name: mysql-container
+    container_name: mysql-lab8
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: CCLab8
     ports:
-      - "3307:3306"
+      - "3311:3306"
     volumes:
       - lab8database:/var/lib/mysql
 
@@ -20,24 +20,20 @@ services:
     restart: always
     ports:
       - "8080:8080"
-    depends_on:
-      - mysql
-      - redis
-      - minio
-      - postfix
 
   minio:
-    image: minio/minio
+    image: minio/minio:latest
     container_name: minio
+    restart: always
     command: server --console-address ":9001" /data
     ports:
       - "9000:9000"
       - "9001:9001"
     environment:
-      MINIO_ROOT_USER: ozan
-      MINIO_ROOT_PASSWORD: 123456
+      MINIO_ROOT_USER: miniolab8
+      MINIO_ROOT_PASSWORD: 12345678
     volumes:
-      - minio-data:/data
+      - minio_data:/data
 
   redis:
     image: redis:latest
@@ -47,24 +43,22 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    command: redis-server --appendonly yes
 
   postfix:
-    image: boky/postfix
+    image: boky/postfix:latest
     container_name: postfix
     restart: always
     environment:
-      - ALLOWED_SENDER_DOMAINS=example.com
-      - POSTFIX_myhostname=mail.example.com
-      - POSTFIX_mynetworks=127.0.0.0/8
+      ALLOWED_SENDER_DOMAINS: wit.edu
+      HOSTNAME: mail.local
     ports:
-      - "1025:25"
+      - "1587:587"
     volumes:
-      - postfix-spool:/var/spool/postfix
-      - postfix-log:/var/log
+      - postfix_data:/var/spool/postfix
 
 volumes:
   lab8database:
-  minio-data:
+  minio_data:
   redis_data:
-  postfix-spool:
-  postfix-log:
+  postfix_data:
