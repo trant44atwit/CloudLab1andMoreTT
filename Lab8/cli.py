@@ -2,6 +2,11 @@ import requests
 import mysql.connector
 import os
 import redis
+import smtplib
+from email.mime.text import MIMEText
+from minio import Minio
+from minio.error import S3Error
+from io import BytesIO
 
 
 PORT = "http://localhost:8080"
@@ -157,6 +162,8 @@ def main():
         print("\nFast = FastAPI routes (like before)")
         print("Options = Run SQL database queries")
         print("Redis = Redis Shared Memory Test")
+        print("Postfix = Postfix Email Server Test")
+        print("MinIO = Shared File System Test")
         print("Exit = Exit the CLI")
         initialchoice = input("\nChoose initial path:")
         if initialchoice.lower() == "fast":
@@ -165,6 +172,10 @@ def main():
             db_query_menu()
         elif initialchoice.lower() == "redis":
             redis_test()
+        elif initialchoice.lower() == "postfix":
+            postfix_test()
+        elif minio_test().lower() == "minio":
+            minio_test()
         elif initialchoice.lower() == "exit":
             exit()
         else:
@@ -283,11 +294,9 @@ queries = {
 
 redis_client = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
-def redis_test(self):
+def redis_test():
     key = input("Enter your key: ")
     value = input("Enter your value to store in Redis: ")
-
-    redis_client.set(key, value)
 
     redis_client.set(key, value)
     print(f"Stored '{key}': '{value}' in Redis.")
@@ -297,6 +306,62 @@ def redis_test(self):
 
     input("Press Enter to return to the main menu.")
 
+def postfix_test():
+    print("Note: Email will not be received due to WIT spam detection, but a real email will be sent.")
+
+    sender = "postfix@wit.edu"
+    receiver = input("Enter receiver email: ")
+    subject = input("Enter subject: ")
+    body = input("Enter email message: ")
+
+    msg = MIMEText(body)
+    msg["Subject"] = subject
+    msg["From"] = sender
+    msg["To"] = receiver
+
+    server = smtplib.SMTP('localhost', 1587)
+
+    server.sendmail(sender, receiver, msg.as_string())
+
+    print("Email has been sent.")
+    print("Check docker logs for the email sending process to see if it went through.")
+    input("Press Enter to return to the main menu.")
+
+
+def minio_test():
+    server = Minio(
+        "localhost:9000",
+        access_key="miniolab8",
+        secret_key="12345678",
+        secure=False
+    )
+
+    bucket_name = input("Enter bucket name: ")
+
+    if not server.bucket_exists(bucket_name):
+        server.make_bucket(bucket_name)
+        print(f"Bucket '{bucket_name}' created.")
+    else:
+        print(f"Bucket '{bucket_name}' already exists.")
+
+    file_name = input("Enter file name ending in .txt (ex. notes.txt): ")
+    file_content = input("Enter file content: ")
+    file_data = BytesIO(file_content.encode("utf-8"))
+    file_size = len(file_content.encode("utf-8"))
+
+    server.put_object(bucket_name, file_name, file_data, file_size)
+    print(f"File '{file_name}' uploaded to bucket '{bucket_name}'.")
+
+    print("Objects in bucket")
+    for obj in server.list_objects(bucket_name):
+        print(f"Object: {obj.object_name}")
+        response = server.get_object(bucket_name, obj.object_name)
+        content = response.read().decode('utf-8')
+        print(f"Content of '{obj.object_name}':{content}")
+        response.close()
+        response.release_conn()
+
+    input("Press Enter to return to the menu.")
 
 
 if __name__ == "__main__":
