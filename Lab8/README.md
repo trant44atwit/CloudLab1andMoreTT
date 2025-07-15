@@ -1,4 +1,4 @@
-# Lab 8: CLI Menu with FastAPI, Database Interaction, MinIO, Postfix, and Redis
+# Lab 8: CLI Menu with Containerized FastAPI, Database Interaction, MinIO, Postfix, and Redis
 
 ## Introduction
 
