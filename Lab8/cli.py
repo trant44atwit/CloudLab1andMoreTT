@@ -1,6 +1,8 @@
 import requests
 import mysql.connector
 import os
+import redis
+
 
 PORT = "http://localhost:8080"
 
@@ -154,12 +156,15 @@ def main():
     while True:
         print("\nFast = FastAPI routes (like before)")
         print("Options = Run SQL database queries")
+        print("Redis = Redis Shared Memory Test")
         print("Exit = Exit the CLI")
         initialchoice = input("\nChoose initial path:")
         if initialchoice.lower() == "fast":
             fast_menu()
         elif initialchoice.lower() == "options":
             db_query_menu()
+        elif initialchoice.lower() == "redis":
+            redis_test()
         elif initialchoice.lower() == "exit":
             exit()
         else:
@@ -275,6 +280,24 @@ queries = {
                      INNER JOIN customers ON orders.customer_id = customers.customer_id;""",
             "16": "SELECT city, COUNT(*) AS num_addresses FROM addresses GROUP BY city;"
         }
+
+redis_client = redis.Redis(host='localhost', port=6379, decode_responses=True)
+
+def redis_test(self):
+    key = input("Enter your key: ")
+    value = input("Enter your value to store in Redis: ")
+
+    redis_client.set(key, value)
+
+    redis_client.set(key, value)
+    print(f"Stored '{key}': '{value}' in Redis.")
+
+    retrieved = redis_client.get(key)
+    print(f"Retrieved '{key}' from Redis: '{retrieved}'")
+
+    input("Press Enter to return to the main menu.")
+
+
 
 if __name__ == "__main__":
     main()
