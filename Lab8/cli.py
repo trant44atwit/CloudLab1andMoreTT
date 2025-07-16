@@ -308,6 +308,7 @@ def redis_test():
 
 def postfix_test():
     print("Note: Email will not be received due to WIT spam detection, but a real email will be sent.")
+    print("Note 2: If on the school WiFi, email will be sent and received if both sender and receiver are connected")
 
     sender = "postfix@wit.edu"
     receiver = input("Enter receiver email: ")
