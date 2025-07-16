@@ -22,7 +22,7 @@ The project includes:
 - A **MySQL database** (`my_guitar_shop`) containing realistic shop data across tables such as `products`, `orders`, `customers`, and more.
 - A **Python command-line interface (CLI)** that allows the user to interact with either API routes or database queries through a menu-driven terminal interface.
 - A **Redis** service that allows for shared memory.
-- A **Postfix** service for an email server.
+- A **Postfix** service for an email server. If on the same WiFi, the email sent will go through since it is locally sent. Sending it outside of the designated WiFi may trigger spam detection.
 - A **MinIO** service for a shared file system.
 - A **unit testing suite** built with `unittest` to validate both the FastAPI routes and MySQL queries, ensuring outputs are as expected.
 
@@ -122,6 +122,8 @@ This lab uses **Docker Compose** to define and run two fully containerized servi
 - Exposes Redis on port `6379`
 - Mounts a Docker volume `redis_data` for persistence
 - Accessible from the CLI via Python’s `redis` client
+- Sets up Redis as a single instance rather than a cluster (multiple Redis nodes)
+- Allows for persistence through "--appendonly yes"
 
 ---
 
@@ -141,6 +143,8 @@ This lab uses **Docker Compose** to define and run two fully containerized servi
 - Accepts SMTP connections on port `1587`
 - Simulates outbound email delivery for development and testing
 - Emails sent using Python’s built-in `smtplib` library
+- Set up locally to allow for email sending on the same WiFi without running into Spam filters
+- Cannot be used to send emails outside of local WiFi
 
 ## How to Run the Project
 
