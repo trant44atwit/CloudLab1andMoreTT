@@ -174,7 +174,7 @@ def main():
             redis_test()
         elif initialchoice.lower() == "postfix":
             postfix_test()
-        elif minio_test().lower() == "minio":
+        elif minio_test() == "minio":
             minio_test()
         elif initialchoice.lower() == "exit":
             exit()
@@ -360,6 +360,8 @@ def minio_test():
         print(f"Content of '{obj.object_name}':{content}")
         response.close()
         response.release_conn()
+
+    print("Now check http://localhost:9001/ to see if the bucket and text file went through!")
 
     input("Press Enter to return to the menu.")
 
